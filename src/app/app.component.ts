@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
+  FormControl,
   FormGroup,
   ValidationErrors,
   ValidatorFn,
@@ -19,7 +20,10 @@ export class AppComponent {
     {
       password: ['test', [Validators.required]],
       confirmPassword: ['test', [Validators.required]],
-      tags: this._fb.array([], [this.minArrayLength(2)]),
+      tags: this._fb.array(
+        [new FormControl('tag 1'), new FormControl('tag 1')],
+        [this.minArrayLength(2)]
+      ),
     },
     { validators: [this.passwordsEqual('password', 'confirmPassword')] }
   );
